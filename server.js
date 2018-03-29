@@ -26,6 +26,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 
+
+
 mongoose.connect("mongodb://localhost:27017/mongoscrape");
 var db = mongoose.connection;
 
@@ -37,6 +39,8 @@ db.once("open", function () {
   console.log("Mongoose connection successful.");
 });
 
+
+
 var router = express.Router();
 app.use('/', router);
 //renders the index page
@@ -45,7 +49,7 @@ router.get('/', function (req, res) {
   res.redirect('/articles');
 });
 
-// A GET route for scraping the echojs website
+// GET route for scraping website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://nytimes.com/").then(function(response) {
