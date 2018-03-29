@@ -26,8 +26,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-
-
 mongoose.connect("mongodb://localhost:27017/mongoscrape");
 var db = mongoose.connection;
 
@@ -40,7 +38,6 @@ db.once("open", function () {
 });
 
 
-
 var router = express.Router();
 app.use('/', router);
 //renders the index page
@@ -50,9 +47,9 @@ router.get('/', function (req, res) {
 });
 
 // GET route for scraping website
-app.get("/scrape", function(req, res) {
+app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with request
-  axios.get("https://nytimes.com/").then(function(response) {
+  axios.get("https://nytimes.com/").then(function (response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
@@ -82,8 +79,6 @@ app.get("/scrape", function(req, res) {
             console.log('Already in DB');
           }
         });
-
-
       }
     });
   });
@@ -148,6 +143,6 @@ router.post('/articles/comment/:id2/delete', function (req, res) {
 });
 
 var port = 3000;
-app.listen(port, function() {
+app.listen(port, function () {
   console.log("App running on port " + port + "!");
 });
