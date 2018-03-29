@@ -78,15 +78,15 @@ app.get("/scrape", function (req, res) {
 
             entry.save(function (err, doc) {
               if (err) {
-                console.log(err);
+                res.json(err);
               }
               else {
-                console.log(doc);
+                res.json(doc);
               }
             });
           }
           else {
-            console.log('Already in DB');
+            res.send('Already in DB');
           }
         });
       }
