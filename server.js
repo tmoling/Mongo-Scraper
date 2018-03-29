@@ -48,10 +48,10 @@ db.once("open", function () {
 });
 
 
-var router = express.Router();
-app.use('/', router);
+// var router = express.Router();
+// app.use('/', router);
 //renders the index page
-router.get('/', function (req, res) {
+app.get('/', function (req, res) {
 
   res.redirect('/articles');
 });
@@ -96,7 +96,7 @@ app.get("/scrape", function (req, res) {
 });
 
 //displays article links
-router.get('/articles', function (req, res) {
+app.get('/articles', function (req, res) {
   Article.find(function (err, doc) {
     articlesObject = { articles: doc };
     res.render('index', articlesObject);
@@ -104,7 +104,7 @@ router.get('/articles', function (req, res) {
 });
 
 //gets the individual article along with its notes
-router.get('/articles/:id', function (req, res) {
+app.get('/articles/:id', function (req, res) {
   Article.findOne({ _id: req.params.id })
     .populate("comments")
     .exec(function (err, doc) {
@@ -115,7 +115,7 @@ router.get('/articles/:id', function (req, res) {
 });
 
 //posts a new comment
-router.post('/articles/:id/comment/create', function (req, res) {
+app.post('/articles/:id/comment/create', function (req, res) {
   var newComment = new Comment(req.body);
 
   newComment.save(function (err, doc) {
@@ -137,7 +137,7 @@ router.post('/articles/:id/comment/create', function (req, res) {
 });
 
 //deletes a comment
-router.post('/articles/comment/:id2/delete', function (req, res) {
+app.post('/articles/comment/:id2/delete', function (req, res) {
   // var threadId = req.params.id1;
   var commentId = req.params.id2;
 
