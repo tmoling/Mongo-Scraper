@@ -1,3 +1,5 @@
+
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -141,6 +143,8 @@ router.post('/articles/comment/:id2/delete', function (req, res) {
     }
   });
 });
+
+var port = process.env.PORT || 3000;
 
 var port = 3000;
 app.listen(port, function () {
